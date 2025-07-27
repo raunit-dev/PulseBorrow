@@ -6,6 +6,7 @@ pub mod instructions;
 pub mod states;
 
 use instructions::*;
+use states::*;
 
 declare_id!("22222222222222222222222222222222222222222222");
 

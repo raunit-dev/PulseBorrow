@@ -13,6 +13,7 @@ use anchor_spl::{
 
 use crate::error::ProtocolError;
 use crate::states::Loan;
+use crate::ID;
 
 pub fn borrow(ctx: Context<Loan>, borrow_amount: u64) -> Result<()> {
     // Make sure we're not sending in an invalid amount that can crash our Protocol
@@ -46,7 +47,7 @@ pub fn borrow(ctx: Context<Loan>, borrow_amount: u64) -> Result<()> {
         // Instruction checks
         require_keys_eq!(repay_ix.program_id, ID, ProtocolError::InvalidProgram);
         require!(
-            repay_ix.data[0..8].eq(instruction::Repay::DISCRIMINATOR),
+            repay_ix.data[0..8] == [234, 103, 67, 82, 208, 234, 219, 166],
             ProtocolError::InvalidIx
         );
 
